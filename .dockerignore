@@ -1,0 +1,31 @@
+# Node dependencies
+node_modules
+npm-debug.log
+dist
+build
+
+# Python dependencies
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Git and OS metadata
+.git
+.gitignore
+.dockerignore
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+Thumbs.db
+.DS_Store
