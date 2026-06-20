@@ -29,3 +29,5 @@ postgres_data/
 *.sln
 *.sw?
 .DS_Store
+
+.env
