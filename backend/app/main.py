@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.app.database import engine, Base
@@ -14,12 +15,8 @@ app = FastAPI(
 
 # Enable CORS for frontend integration. 
 # Credentials (cookies) require explicit origins instead of wildcard '*'.
-ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-]
+allowed_origins_env = os.getenv("ALLOWED_ORIGINS", "")
+ALLOWED_ORIGINS = allowed_origins_env.split(",") if allowed_origins_env else []
 
 app.add_middleware(
     CORSMiddleware,
