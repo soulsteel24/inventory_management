@@ -245,7 +245,7 @@ function Dashboard() {
                   const maxCount = Math.max(...monthlyOrders.map(m => m.count), 1);
                   const barHeight = (month.count / maxCount) * 100;
                   return (
-                    <div key={idx} className="flex flex-col items-center group w-12 relative">
+                    <div key={idx} className="flex flex-col items-center justify-end group w-12 relative h-full">
                       {/* Tooltip on hover */}
                       <div className="absolute bottom-full mb-2 hidden group-hover:flex flex-col items-center bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-[10px] font-bold py-1 px-2 rounded shadow-lg z-25 whitespace-nowrap">
                         <span>{month.count} Orders</span>
