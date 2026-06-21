@@ -11,7 +11,7 @@ def create_customer(customer: schemas.CustomerCreate, db: Session = Depends(get_
     db_customer = crud.get_customer_by_email(db, email=customer.email)
     if db_customer:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
+            status_code=status.HTTP_409_CONFLICT,
             detail=f"Customer with email '{customer.email}' already exists"
         )
     return crud.create_customer(db=db, customer=customer)
