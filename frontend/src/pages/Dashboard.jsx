@@ -62,16 +62,29 @@ function Dashboard() {
           monthsData.push({
             name: d.toLocaleString('default', { month: 'short' }),
             year: d.getFullYear(),
+            month: d.getMonth(),
             count: 0,
             amount: 0
           });
         }
 
-        // Distribute orders across the 6 months deterministically
+        // Distribute orders across the 6 months based on actual creation date
         orders.forEach(order => {
-          const monthIndex = order.id % 6; // 0 to 5
-          monthsData[monthIndex].count += 1;
-          monthsData[monthIndex].amount += order.total_amount || 0;
+          if (order.created_at) {
+            const orderDate = new Date(order.created_at);
+            const orderMonth = orderDate.getMonth();
+            const orderYear = orderDate.getFullYear();
+            
+            // Find if this order belongs to one of our 6 displayed months
+            const targetMonthIndex = monthsData.findIndex(
+              m => m.month === orderMonth && m.year === orderYear
+            );
+            
+            if (targetMonthIndex !== -1) {
+              monthsData[targetMonthIndex].count += 1;
+              monthsData[targetMonthIndex].amount += order.total_amount || 0;
+            }
+          }
         });
 
         setMonthlyOrders(monthsData);

@@ -1,5 +1,6 @@
 from pydantic import BaseModel, EmailStr, Field, field_validator
 from typing import List, Optional
+from datetime import datetime
 
 # --- PRODUCT SCHEMAS ---
 class ProductBase(BaseModel):
@@ -64,6 +65,7 @@ class OrderResponse(BaseModel):
     id: int
     customer_id: int
     total_amount: float
+    created_at: datetime
     items: List[OrderItemResponse]
     customer: Optional[CustomerResponse] = None
 

@@ -18,6 +18,9 @@ app = FastAPI(
 allowed_origins_env = os.getenv("ALLOWED_ORIGINS", "")
 ALLOWED_ORIGINS = allowed_origins_env.split(",") if allowed_origins_env else []
 
+# Strip trailing slashes and whitespace in case they were added accidentally
+ALLOWED_ORIGINS = [origin.strip().rstrip("/") for origin in ALLOWED_ORIGINS if origin.strip()]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
